@@ -70,4 +70,7 @@
   .pomodoro-wrapper {
     grid-template-columns: 1fr;
   }
+  .time {
+    font-size: 1.5rem;
+  }
 }

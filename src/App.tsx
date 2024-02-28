@@ -81,7 +81,7 @@ function App() {
           />
           {!!selectedTodo && (
             <>
-              {!isRunning || !(isFocusStarted && !isRestStarted) ? (
+              {!isRunning || (!isFocusStarted && !isRestStarted) ? (
                 <button onClick={startPomodoro}>Start Focus Time</button>
               ) : (
                 <button onClick={pause}>Stop</button>
