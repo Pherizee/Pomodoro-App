@@ -36,6 +36,7 @@
   left: 50%;
   font-size: 2rem;
   transform: translate(-50%, -50%);
+  text-align: center;
 }
 
 .todo-tasks {
