@@ -12,6 +12,7 @@ export interface TimeState {
 }
 
 function App() {
+  const [timerRunCount, setTimerRunCount] = useState(0);
   const [isFocusStarted, setIsFocusStarted] = useState(false);
   const [isRestStarted, setIsRestStarted] = useState(false);
   const [selectedTodo, setSelectedTodo] = useState<TodoType | null>(null);
@@ -30,17 +31,24 @@ function App() {
   };
 
   const startPomodoro = () => {
-    stop();
-    if (!isFocusStarted) {
-      setIsFocusStarted(true);
-      setIsRestStarted(false);
-      const newTimeStamp = generateTimerOffset(times.focus);
-      restart(newTimeStamp);
-    } else if (!isRestStarted) {
+    if (timerRunCount < 2) {
+      if (!isFocusStarted) {
+        setIsFocusStarted(true);
+        setIsRestStarted(false);
+        const newTimeStamp = generateTimerOffset(times.focus);
+        restart(newTimeStamp);
+        setTimerRunCount((prev) => prev + 1);
+      } else if (!isRestStarted) {
+        setIsFocusStarted(false);
+        setIsRestStarted(true);
+        const newTimeStamp = generateTimerOffset(times.rest);
+        restart(newTimeStamp);
+        setTimerRunCount((prev) => prev + 1);
+      }
+    } else {
       setIsFocusStarted(false);
-      setIsRestStarted(true);
-      const newTimeStamp = generateTimerOffset(times.rest);
-      restart(newTimeStamp);
+      setIsRestStarted(false);
+      setTimerRunCount(0);
     }
   };
 
@@ -54,7 +62,7 @@ function App() {
 
   return (
     <div>
-      <h1>Feranmi's Pomodoro App</h1>
+      <h1>Pomodoro App</h1>
 
       <div className="pomodoro-wrapper">
         <TodoList
@@ -73,7 +81,7 @@ function App() {
           />
           {!!selectedTodo && (
             <>
-              {!isRunning && (!isFocusStarted || !isRestStarted) ? (
+              {!isRunning || !(isFocusStarted && !isRestStarted) ? (
                 <button onClick={startPomodoro}>Start Focus Time</button>
               ) : (
                 <button onClick={pause}>Stop</button>
