@@ -1,0 +1,67 @@
+.add-todo label,
+.timer-config label {
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.add-todo input,
+.timer-config input {
+  width: 300px;
+  border: 1px solid #bbb;
+  padding: 0.8rem;
+  border-radius: 0.8rem;
+  margin-bottom: 1rem;
+  margin-right: 1rem;
+}
+
+.pomodoro-wrapper {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  width: min(1140px, calc(100% - 64px));
+  margin-inline: auto;
+}
+
+.timer {
+  position: relative;
+  margin-inline: auto;
+  margin-top: 1rem;
+  width: 200px;
+  aspect-ratio: 1;
+}
+
+.time {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  font-size: 2rem;
+  transform: translate(-50%, -50%);
+}
+
+.todo-tasks {
+  list-style: none;
+  padding: 0;
+}
+
+.todo-tasks li {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 0.8rem;
+}
+
+.todo-tasks li input {
+  margin-right: 0.8rem;
+}
+
+.todo-tasks li.completed label {
+  position: relative;
+}
+
+.todo-tasks li.completed label::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  height: 2px;
+  width: 100%;
+  background-color: #fff;
+}
